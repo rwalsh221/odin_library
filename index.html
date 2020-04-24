@@ -8,7 +8,7 @@
         
     </head>
 
-    <body>
+    <body >
 
         <header>
 
@@ -18,21 +18,41 @@
 
         <main>
 
-            <section class="books">
+            <section class="book-input">
+
+                <button class="btn btn__form" id="btn__form">ADD BOOK TO LIBRARY</button>
+
+                <div class="form-popup" id="book-form">
+                    <form class="book-input__form">
+
+                        <label for="b-title">BOOK TITLE:</label>
+                        <input type="text" id="b-title" name="b-title"><br>
+
+                        <label for="b-author">BOOK AUTHOR:</label>
+                        <input type="text" id="b-author" name="b-author"><br>
+
+                        <label for="b-pages">NUMBER OF PAGES:</label>
+                        <input type="text" id="b-pages" name="b-pages"><br>
+
+                        <label for="b-read">BOOK HAS BEEN READ?:</label>
+                        <input type="radio" id="yes" name="b-read">
+                        <label for="yes">YES</label>
+                        <input type="radio" id="no" name="b-read">
+                        <label for="no">NO</label>
+
+                    </form>
+                    <button class="btn btn__Add">ADD TO LIBRARY</button>
+                    <button class="btn btn__close" id="btn__close">CLOSE</button>
+                </div>
+
+
+            </section>
+
+            <section class="book-section" id="body__blur">
 
                <div class="book__card">
 
-                    <!-- <div class="book__1">
-
-                        <h2 class="book__header">BOOK TITLE: <span id="book-info__title"></span></h2>
-
-                        <h3 class="book__author">BOOK AUTHOR: <span id="book-info__autjor"></span></h3>
-
-                        <h3 class="book__pages">NUMBER OF PAGES: <span id="book-info__pages"></span></h3>
-
-                        <h3 class="book__read">BOOK HAS BEEN READ?: <span id="book-info__read"></span></h3>
-                </div> -->
-
+                    
                </div>
 
             </section>
@@ -56,6 +76,16 @@
                 </div>
 
 
+ <div class="book__1">
+
+                        <h2 class="book__header">BOOK TITLE: <span id="book-info__title"></span></h2>
+
+                        <h3 class="book__author">BOOK AUTHOR: <span id="book-info__autjor"></span></h3>
+
+                        <h3 class="book__pages">NUMBER OF PAGES: <span id="book-info__pages"></span></h3>
+
+                        <h3 class="book__read">BOOK HAS BEEN READ?: <span id="book-info__read"></span></h3>
+                </div>
 
 
 

@@ -22,19 +22,6 @@ let addBookToLibrary = function (title, author, pages, haveRead) {
   myLibrary.push(newBook);
 }
 
-// let render = function () {
-//   for (i = 0; i < myLibrary.length; i++) {
-//     let book = myLibrary[i]
-//     log(myLibrary[i]) 
-//     document.querySelector(`#book-info__${i+1}`).innerHTML = `${book.title}`
-//     document.querySelector(`#book-info__${i+2}`).innerHTML = `${book.author}`
-//     document.querySelector(`#book-info__${i+3}`).innerHTML = `${book.pages}`
-//     document.querySelector(`#book-info__${i+4}`).innerHTML = `${book.haveRead}`
-    
-//     // document.querySelector('#main').innerHTML = book.author
-//   }
-// }
-
 let render = function () {
   
  let html = '<div class="book"> <h2 class="book__header">BOOK TITLE: <span id="book-info__title-%id%"></span></h2> <h3 class="book__author">BOOK AUTHOR: <span id="book-info__author-%id%"></span></h3> <h3 class="book__pages">NUMBER OF PAGES: <span id="book-info__pages-%id%"></span></h3> <h3 class="book__read">BOOK HAS BEEN READ?: <span id="book-info__read-%id%"></span></h3> </div>'
@@ -57,32 +44,49 @@ addBookToLibrary('bible', 'jesus','500','no');
 addBookToLibrary('got', 'test6','test7','test8');
 addBookToLibrary('lotr', 'test10','test11','test12');
 addBookToLibrary('got', 'test6','test7','test8');
-addBookToLibrary('got', 'test6','test7','test8');
-addBookToLibrary('got', 'test6','test7','test8');
-addBookToLibrary('bible', 'jesus','500','no');
-addBookToLibrary('got', 'test6','test7','test8');
-addBookToLibrary('lotr', 'test10','test11','test12');
-addBookToLibrary('got', 'test6','test7','test8');
-addBookToLibrary('got', 'test6','test7','test8');
-addBookToLibrary('got', 'test6','test7','test8');
-addBookToLibrary('bible', 'jesus','500','no');
-addBookToLibrary('got', 'test6','test7','test8');
-addBookToLibrary('lotr', 'test10','test11','test12');
-addBookToLibrary('got', 'test6','test7','test8');
-addBookToLibrary('got', 'test6','test7','test8');
-addBookToLibrary('got', 'test6','test7','test8');
-addBookToLibrary('bible', 'jesus','500','no');
-addBookToLibrary('got', 'test6','test7','test8');
-addBookToLibrary('lotr', 'test10','test11','test12');
-addBookToLibrary('got', 'test6','test7','test8');
-addBookToLibrary('got', 'test6','test7','test8');
-addBookToLibrary('got', 'test6','test7','test8');
+
+
+let openForm = function() {
+  document.getElementById('book-form').style.display = 'inline-block'
+  document.getElementById('body__blur').style.filter = 'blur(60px)'
+}
+
+let closeForm = function() {
+  document.getElementById('book-form').style.display = 'none'
+  document.getElementById('body__blur').style.filter = 'blur(0px)'
+}
+
+document.getElementById('btn__form').addEventListener('click', function() {
+  openForm();
+});
+
+document.getElementById('btn__close').addEventListener('click', function() {
+  closeForm();
+});
 
 
 
 
 
-log(myLibrary);
 
-log('working');
+
+
+
+
 render();
+
+
+// NOTES **************************************************************************************************************
+
+// let render = function () {
+//   for (i = 0; i < myLibrary.length; i++) {
+//     let book = myLibrary[i]
+//     log(myLibrary[i]) 
+//     document.querySelector(`#book-info__${i+1}`).innerHTML = `${book.title}`
+//     document.querySelector(`#book-info__${i+2}`).innerHTML = `${book.author}`
+//     document.querySelector(`#book-info__${i+3}`).innerHTML = `${book.pages}`
+//     document.querySelector(`#book-info__${i+4}`).innerHTML = `${book.haveRead}`
+    
+//     // document.querySelector('#main').innerHTML = book.author
+//   }
+// }
