@@ -25,8 +25,10 @@
                 <div class="form-popup" id="book-form">
                     <form class="book-input__form">
 
-                        <label for="b-title">BOOK TITLE:</label>
-                        <input type="text" id="b-title" name="b-title"><br>
+                        <div class="form-box">
+                            <label for="b-title">BOOK TITLE:</label>
+                            <input type="text" id="b-title" name="b-title"><br>
+                        </div>
 
                         <label for="b-author">BOOK AUTHOR:</label>
                         <input type="text" id="b-author" name="b-author"><br>
@@ -34,14 +36,14 @@
                         <label for="b-pages">NUMBER OF PAGES:</label>
                         <input type="text" id="b-pages" name="b-pages"><br>
 
-                        <label for="b-read">BOOK HAS BEEN READ?:</label>
+                        <!-- <label for="b-read">BOOK HAS BEEN READ?:</label>
                         <input type="radio" id="yes" name="b-read">
                         <label for="yes">YES</label>
                         <input type="radio" id="no" name="b-read">
-                        <label for="no">NO</label>
+                        <label for="no">NO</label> -->
 
                     </form>
-                    <button class="btn btn__Add">ADD TO LIBRARY</button>
+                    <button class="btn btn__add" id="btn__add">ADD TO LIBRARY</button>
                     <button class="btn btn__close" id="btn__close">CLOSE</button>
                 </div>
 
@@ -50,7 +52,7 @@
 
             <section class="book-section" id="body__blur">
 
-               <div class="book__card">
+               <div class="book__card" id="book__card">
 
                     
                </div>

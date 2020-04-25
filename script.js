@@ -2,6 +2,8 @@ let log = console.log
 
 let myLibrary = [];
 
+let bookArray = 0
+
 function book (title, author, pages, haveRead) {
     this.title = title,
     this.author = author,
@@ -17,15 +19,31 @@ const newBook1 = new book('The Bible', 'Jesus', '510', 'it has not been read');
 console.log(newBook1.report());
 
 
-let addBookToLibrary = function (title, author, pages, haveRead) {
-  let newBook = new book(title, author, pages, haveRead);
+let addBookToLibrary = function () {
+  
+  let title, author, pages, haveRead;
+  
+  title = document.getElementById('b-title').value;
+  author = document.getElementById('b-author').value;
+  pages = document.getElementById('b-pages').value
+
+  
+
+  let newBook = new book(title, author, pages);
   myLibrary.push(newBook);
+  document.forms[0].reset()
+  render();
 }
 
 let render = function () {
   
  let html = '<div class="book"> <h2 class="book__header">BOOK TITLE: <span id="book-info__title-%id%"></span></h2> <h3 class="book__author">BOOK AUTHOR: <span id="book-info__author-%id%"></span></h3> <h3 class="book__pages">NUMBER OF PAGES: <span id="book-info__pages-%id%"></span></h3> <h3 class="book__read">BOOK HAS BEEN READ?: <span id="book-info__read-%id%"></span></h3> </div>'
 
+ const parent = document.getElementById('book__card');
+
+ while(parent.firstChild) {
+   parent.firstChild.remove();
+ }
   
   for (i = 0; i < myLibrary.length; i++) {
     let newHtml = html.replace(/%id%/g, i)
@@ -40,10 +58,10 @@ let render = function () {
   }
 }
 
-addBookToLibrary('bible', 'jesus','500','no');
-addBookToLibrary('got', 'test6','test7','test8');
-addBookToLibrary('lotr', 'test10','test11','test12');
-addBookToLibrary('got', 'test6','test7','test8');
+// addBookToLibrary('bible', 'jesus','500','no');
+// addBookToLibrary('got', 'test6','test7','test8');
+// addBookToLibrary('lotr', 'test10','test11','test12');
+// addBookToLibrary('got', 'test6','test7','test8');
 
 
 let openForm = function() {
@@ -54,15 +72,12 @@ let openForm = function() {
 let closeForm = function() {
   document.getElementById('book-form').style.display = 'none'
   document.getElementById('body__blur').style.filter = 'blur(0px)'
+ 
 }
 
-document.getElementById('btn__form').addEventListener('click', function() {
-  openForm();
-});
-
-document.getElementById('btn__close').addEventListener('click', function() {
-  closeForm();
-});
+document.getElementById('btn__form').addEventListener('click', openForm);
+document.getElementById('btn__close').addEventListener('click', closeForm);
+document.getElementById('btn__add').addEventListener('click', addBookToLibrary);
 
 
 
@@ -71,9 +86,6 @@ document.getElementById('btn__close').addEventListener('click', function() {
 
 
 
-
-
-render();
 
 
 // NOTES **************************************************************************************************************
