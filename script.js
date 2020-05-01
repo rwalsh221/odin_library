@@ -4,7 +4,8 @@ let myLibrary = [];
 
 let bookArray = 0
 
-function book (title, author, pages, haveRead) {
+function book (id, title, author, pages, haveRead) {
+    this.id = id
     this.title = title,
     this.author = author,
     this.pages = pages,
@@ -21,7 +22,15 @@ console.log(newBook1.report());
 
 let addBookToLibrary = function () {
   
-  let title, author, pages, haveRead;
+  let id, title, author, pages, haveRead;
+
+  if (myLibrary.length > 0) {
+    id = myLibrary[myLibrary.length -1].id + 1
+  } else {
+    id = 0
+  }
+
+  console.log(id)
   
   title = document.getElementById('b-title').value;
   author = document.getElementById('b-author').value;
@@ -29,7 +38,7 @@ let addBookToLibrary = function () {
 
   
 
-  let newBook = new book(title, author, pages);
+  let newBook = new book(id, title, author, pages);
   myLibrary.push(newBook);
   document.forms[0].reset()
   render();
@@ -37,7 +46,7 @@ let addBookToLibrary = function () {
 
 let render = function () {
   
- let html = '<div class="book"> <h2 class="book__header">BOOK TITLE: <span id="book-info__title-%id%"></span></h2> <h3 class="book__author">BOOK AUTHOR: <span id="book-info__author-%id%"></span></h3> <h3 class="book__pages">NUMBER OF PAGES: <span id="book-info__pages-%id%"></span></h3> <h3 class="book__read">BOOK HAS BEEN READ?: <span id="book-info__read-%id%"></span></h3> </div>'
+ let html = '<div class="book" id="id-%id%"> <button class="btn btn__delete" id="btn__delete">delete</button> <h2 class="book__header">BOOK TITLE: <span id="book-info__title-%num%"></span></h2> <h3 class="book__author">BOOK AUTHOR: <span id="book-info__author-%num%"></span></h3> <h3 class="book__pages">NUMBER OF PAGES: <span id="book-info__pages-%num%"></span></h3> <h3 class="book__read">BOOK HAS BEEN READ?: <span id="book-info__read-%num%"></span></h3> </div>'
 
  const parent = document.getElementById('book__card');
 
@@ -46,7 +55,8 @@ let render = function () {
  }
   
   for (i = 0; i < myLibrary.length; i++) {
-    let newHtml = html.replace(/%id%/g, i)
+    let newHtml = html.replace('%id%', myLibrary[i].id); 
+    newHtml = newHtml.replace(/%num%/g, i)
     document.querySelector('.book__card').insertAdjacentHTML('beforeend', newHtml);
 
     let book = myLibrary[i];
@@ -58,10 +68,21 @@ let render = function () {
   }
 }
 
-// addBookToLibrary('bible', 'jesus','500','no');
-// addBookToLibrary('got', 'test6','test7','test8');
-// addBookToLibrary('lotr', 'test10','test11','test12');
-// addBookToLibrary('got', 'test6','test7','test8');
+let deleteBook = function(event) {
+  let bookID, dBook;
+  console.log('work1');
+  bookID = event.target.parentNode.id
+  console.log('work2');
+  console.log(bookID);
+  console.log('work3');
+  dBook = document.getElementById(bookID);
+  console.log(dBook.parentNode)
+  document.getElementById(bookID).parentNode.removeChild(document.getElementById(bookID));
+  console.log('work4');
+
+}
+
+
 
 
 let openForm = function() {
@@ -72,17 +93,20 @@ let openForm = function() {
 let closeForm = function() {
   document.getElementById('book-form').style.display = 'none'
   document.getElementById('body__blur').style.filter = 'blur(0px)'
- 
 }
 
 document.getElementById('btn__form').addEventListener('click', openForm);
 document.getElementById('btn__close').addEventListener('click', closeForm);
 document.getElementById('btn__add').addEventListener('click', addBookToLibrary);
+document.querySelector('.container').addEventListener('click', deleteBook);
 
 
 
 
 
+const testString = ('id-55565456564');
+let testSplit = testString.split("-")
+console.log(testSplit);
 
 
 
@@ -102,3 +126,8 @@ document.getElementById('btn__add').addEventListener('click', addBookToLibrary);
 //     // document.querySelector('#main').innerHTML = book.author
 //   }
 // }
+
+// addBookToLibrary('bible', 'jesus','500','no');
+// addBookToLibrary('got', 'test6','test7','test8');
+// addBookToLibrary('lotr', 'test10','test11','test12');
+// addBookToLibrary('got', 'test6','test7','test8');
