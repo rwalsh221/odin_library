@@ -35,10 +35,15 @@ let addBookToLibrary = function () {
   title = document.getElementById('b-title').value;
   author = document.getElementById('b-author').value;
   pages = document.getElementById('b-pages').value
-
+  
+  if (document.getElementById('radio-yes').checked === true) {
+    haveRead = 'The book has been read';
+  } else if (document.getElementById('radio-no').checked === true) {
+    haveRead = 'The book has not been read'
+  }
   
 
-  let newBook = new book(id, title, author, pages);
+  let newBook = new book(id, title, author, pages, haveRead);
   myLibrary.push(newBook);
   document.forms[0].reset()
   render();
@@ -46,9 +51,9 @@ let addBookToLibrary = function () {
 
 let render = function () {
   
- let html = '<div class="book" id="id-%id%"> <button class="btn btn__delete" id="btn__delete">delete</button> <h2 class="book__header">BOOK TITLE: <span id="book-info__title-%num%"></span></h2> <h3 class="book__author">BOOK AUTHOR: <span id="book-info__author-%num%"></span></h3> <h3 class="book__pages">NUMBER OF PAGES: <span id="book-info__pages-%num%"></span></h3> <h3 class="book__read">BOOK HAS BEEN READ?: <span id="book-info__read-%num%"></span></h3> </div>'
+ let html = '<div class="book" id="id-%id%"> <div> <button class="btn btn__delete" id="btn__delete">delete</button> </div> <h2 class="book__header">BOOK TITLE: <span id="book-info__title-%num%"></span></h2> <h3 class="book__author">BOOK AUTHOR: <span id="book-info__author-%num%"></span></h3> <h3 class="book__pages">NUMBER OF PAGES: <span id="book-info__pages-%num%"></span></h3> <h3 class="book__read">BOOK HAS BEEN READ?: <span id="book-info__read-%num%"></span></h3> </div>'
 
- const parent = document.getElementById('book__card');
+ const parent = document.querySelector('.book__card');
 
  while(parent.firstChild) {
    parent.firstChild.remove();
@@ -69,16 +74,42 @@ let render = function () {
 }
 
 let deleteBook = function(event) {
-  let bookID, dBook;
-  console.log('work1');
-  bookID = event.target.parentNode.id
-  console.log('work2');
-  console.log(bookID);
-  console.log('work3');
-  dBook = document.getElementById(bookID);
-  console.log(dBook.parentNode)
-  document.getElementById(bookID).parentNode.removeChild(document.getElementById(bookID));
-  console.log('work4');
+  let bookNodeID, dBook, libraryID, libraryIndex, bookID, splitBookID;
+  // console.log('work1');
+  bookNodeID = event.target.parentNode.parentNode.id
+  // console.log('work2');
+  // console.log(bookID);
+  // console.log('work3');
+  
+  // console.log(dBook.parentNode)
+  
+  // console.log('work4');
+
+  // console.log(event.target.parentNode.parentNode.id);
+
+  if(bookNodeID) {
+    
+    splitBookID = bookNodeID.split('-')
+    bookID = parseInt(splitBookID[1]);
+    dBook = document.getElementById(bookNodeID);
+    dBook.parentNode.removeChild(document.getElementById(bookNodeID));
+  }
+
+  libraryID = myLibrary.map(function(current) {
+    return current.id;
+  })
+
+  log(libraryID)
+
+  libraryIndex = libraryID.indexOf(bookID);
+
+  log(libraryIndex);
+
+  if (libraryIndex !== -1) {
+    myLibrary.splice(libraryIndex, 1)
+  }
+
+  log(myLibrary);
 
 }
 
