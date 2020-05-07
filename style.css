@@ -3,6 +3,8 @@
 html {
     box-sizing: border-box;
     font-size: 62.5%;
+    font-family: 'Crete Round', serif;
+    
   }
   
   *, *:before, *:after {
@@ -25,7 +27,7 @@ html {
   }
 
   body {
-    background-color: pink;
+    background-color: #581c0c;
    
   }
 
@@ -34,8 +36,10 @@ html {
   .book-section {
     width: 90%;
     min-height: 100vh;
-    background-color: aqua;
+    background-color: #ca5116;
     margin: 0 auto;
+    border-radius: 2rem;
+    box-shadow: 1rem 1rem 1rem black;
     
   }
 
@@ -45,14 +49,56 @@ html {
     flex-wrap: wrap;
   }
 
+  
+
   .book {
     flex: 0 1 22%;
     padding: 30px 10px;
-    background-color: blue;
+    background-color: #f9b384;
     text-align: center;
     margin-bottom: 15px;
-    line-height: 100px;
+    margin-top: 1rem;
+    border-radius: 1rem;
+    box-shadow: 1rem 1rem 1rem black;
+    display: flex;
+    flex-direction: column;
+    border: 3px solid #581c0c;
+    
   }
+
+  .book > h2 {
+    margin-top: .5rem;
+    font-size: 1.6rem;
+    margin-bottom: .5rem;
+  }
+
+  .book > h3 {
+    font-size: 1.2rem;
+  }
+
+  .book > h3 {
+    margin-bottom: .5rem;
+    
+  }
+
+  .book > h2,
+  .book > h3 {
+    background-color: #f1e3cb;
+    text-align: left;
+    
+    padding: 1.5rem;
+    border-radius: 1rem;
+    font-family: 'Raleway', sans-serif;
+    font-style: italic;
+    font-weight: 600;
+    border: 2px solid #581c0c;
+  }
+
+  .book > h2 > span,
+  .book > h3 > span {
+    font-family: 'Crete Round', serif;
+  }
+ 
 
   /* FORM STYLE */
 
@@ -73,4 +119,34 @@ html {
     margin: -70px 0 0 -170px;
     z-index: 100;
    
+  }
+
+  /* BUTTON STYLE */
+
+  .btn__read,
+  .btn__delete {
+    display: inline-block;
+    max-width: max-content;
+  }
+
+  .btn__delete {
+    align-self: flex-end;
+    margin-bottom: 1rem;
+  }
+
+  .btn__read {
+    margin-top: 1rem;
+  }
+
+  .line {
+    height: 2px;
+    width: 60%;
+    background-color: #581c0c;
+    align-self: center;
+    margin-bottom: .5rem;
+  }
+
+  .line-long {
+    margin-top: .5rem;
+    width: 80%;
   }

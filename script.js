@@ -1,3 +1,35 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+// *************************************************************************************************
+// CHANGED DIVS CONTAINERS FROM BTNS FOR CSS STYLE. NEED TO CHANGE NODES ON ID SELECTORS TO GET THEM TO WORK. SEE HTML
+// CHANGED HTML. NEED TO CHANGE HTML FOR RENDER FUNCTION. ADDED LINE DIV AND REMOVED SOME ON BUTTONS
+// **************************************************************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 let log = console.log
 
 let myLibrary = [];
@@ -51,7 +83,7 @@ let addBookToLibrary = function () {
 
 let render = function () {
   
- let html = '<div class="book" id="id-%id%"> <div> <button class="btn btn__delete" id="btn__delete">delete</button> </div> <h2 class="book__header">BOOK TITLE: <span id="book-info__title-%num%"></span></h2> <h3 class="book__author">BOOK AUTHOR: <span id="book-info__author-%num%"></span></h3> <h3 class="book__pages">NUMBER OF PAGES: <span id="book-info__pages-%num%"></span></h3> <h3 class="book__read">BOOK HAS BEEN READ?: <span id="book-info__read-%num%"></span></h3> </div>'
+ let html = '<div class="book" id="bookid-%id%"> <div> <button class="btn btn__delete" id="btn__delete">delete</button> </div> <h2 class="book__header">BOOK TITLE: <span id="book-info__title-%num%"></span></h2> <h3 class="book__author">BOOK AUTHOR: <span id="book-info__author-%num%"></span></h3> <h3 class="book__pages">NUMBER OF PAGES: <span id="book-info__pages-%num%"></span></h3> <h3 class="book__read">BOOK HAS BEEN READ?: <span id="book-info__read-%num%"></span></h3> <div> <button class="btn btn__read" id="btn__read-yes">read yes</button> </div> <div> <button class="btn btn__read" id="btn__read-no">read no</button> </div> </div>'
 
  const parent = document.querySelector('.book__card');
 
@@ -66,17 +98,24 @@ let render = function () {
 
     let book = myLibrary[i];
 
-    document.querySelector(`#book-info__title-${i}`).innerHTML = `${book.title}`
-    document.querySelector(`#book-info__author-${i}`).innerHTML = `${book.author}`
-    document.querySelector(`#book-info__pages-${i}`).innerHTML = `${book.pages}`
-    document.querySelector(`#book-info__read-${i}`).innerHTML = `${book.haveRead}`
+    document.querySelector(`#book-info__title-${i}`).innerHTML = `${book.title}`;
+    document.querySelector(`#book-info__author-${i}`).innerHTML = `${book.author}`;
+    document.querySelector(`#book-info__pages-${i}`).innerHTML = `${book.pages}`;
+    document.querySelector(`#book-info__read-${i}`).innerHTML = `${book.haveRead}`;
+
+    if (document.getElementById(`book-info__read-${i}`).textContent == 'The book has not been read') {
+      document.getElementById(`bookid-${i}`).style.backgroundColor = 'red';
+    }
   }
+
+  numberOfBook();
 }
 
 let deleteBook = function(event) {
   let bookNodeID, dBook, libraryID, libraryIndex, bookID, splitBookID;
   // console.log('work1');
   bookNodeID = event.target.parentNode.parentNode.id
+  log(event.target.id)
   // console.log('work2');
   // console.log(bookID);
   // console.log('work3');
@@ -87,7 +126,7 @@ let deleteBook = function(event) {
 
   // console.log(event.target.parentNode.parentNode.id);
 
-  if(bookNodeID) {
+  if(bookNodeID && event.target.id == 'btn__delete') {
     
     splitBookID = bookNodeID.split('-')
     bookID = parseInt(splitBookID[1]);
@@ -110,6 +149,8 @@ let deleteBook = function(event) {
   }
 
   log(myLibrary);
+  let numBook = myLibrary.length;
+  numberOfBook();
 
 }
 
@@ -126,10 +167,47 @@ let closeForm = function() {
   document.getElementById('body__blur').style.filter = 'blur(0px)'
 }
 
+let numberOfBook = function() {
+  let numBook = myLibrary.length;
+  
+  if (myLibrary.length > 0) {
+    document.getElementById('number__book').textContent = `The Library contains ${numBook} books`
+  } else {
+    document.getElementById('number__book').textContent = `The Library does not contain any books`
+  }
+};
+
+let hasBeenRead = function(event) {
+  let bookNodeID,bookNodeYesNo, splitBookID, bookID;
+  
+  bookNodeID = event.target.parentNode.parentNode.id;
+  log(bookNodeID);
+
+  if (bookNodeID && event.target.id == 'btn__read-yes' || event.target.id == 'btn__read-no') {
+    splitBookID = bookNodeID.split('-');
+    bookID = splitBookID[1];
+  }
+  
+  
+
+  bookNodeYesNo = event.target.id
+  log(event.target.id);
+  log(bookNodeYesNo);
+
+  if (bookNodeYesNo == 'btn__read-yes') {
+    document.getElementById(`book-info__read-${bookID}`).textContent = 'This book has been read'
+    document.getElementById(`bookid-${bookID}`).style.backgroundColor = 'blue';
+  } else if (bookNodeYesNo == 'btn__read-no') {
+    document.getElementById(`book-info__read-${bookID}`).textContent = 'This book has not been read'
+    document.getElementById(`bookid-${bookID}`).style.backgroundColor = 'red';
+  }
+};
+
 document.getElementById('btn__form').addEventListener('click', openForm);
 document.getElementById('btn__close').addEventListener('click', closeForm);
 document.getElementById('btn__add').addEventListener('click', addBookToLibrary);
 document.querySelector('.container').addEventListener('click', deleteBook);
+document.querySelector('.container').addEventListener('click', hasBeenRead);
 
 
 
@@ -138,6 +216,7 @@ document.querySelector('.container').addEventListener('click', deleteBook);
 const testString = ('id-55565456564');
 let testSplit = testString.split("-")
 console.log(testSplit);
+numberOfBook();
 
 
 
