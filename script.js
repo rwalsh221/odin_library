@@ -104,7 +104,9 @@ let render = function () {
     document.querySelector(`#book-info__read-${i}`).innerHTML = `${book.haveRead}`;
 
     if (document.getElementById(`book-info__read-${i}`).textContent == 'The book has not been read') {
-      document.getElementById(`bookid-${i}`).style.backgroundColor = 'red';
+      document.getElementById(`bookid-${i}`).classList.add('book-NA');
+    } else if (document.getElementById(`book-info__read-${i}`).textContent == 'The book has been read') {
+      document.getElementById(`bookid-${i}`).classList.add('book-AV');
     }
   }
 
@@ -196,10 +198,17 @@ let hasBeenRead = function(event) {
 
   if (bookNodeYesNo == 'btn__read-yes') {
     document.getElementById(`book-info__read-${bookID}`).textContent = 'This book has been read'
-    document.getElementById(`bookid-${bookID}`).style.backgroundColor = 'blue';
+    document.getElementById(`bookid-${bookID}`).style.boxShadow = '1rem 1rem 1rem black';
+    
+    document.getElementById(`bookid-${bookID}`).classList.remove('book-NA');
+    document.getElementById(`bookid-${bookID}`).classList.add('book-AV');
+    
   } else if (bookNodeYesNo == 'btn__read-no') {
     document.getElementById(`book-info__read-${bookID}`).textContent = 'This book has not been read'
-    document.getElementById(`bookid-${bookID}`).style.backgroundColor = 'red';
+    // document.getElementById(`bookid-${bookID}`).style.boxShadow = '1rem 1rem 1rem red';
+    document.getElementById(`bookid-${bookID}`).classList.remove('book-AV');
+    document.getElementById(`bookid-${bookID}`).classList.add('book-NA');
+
   }
 };
 
