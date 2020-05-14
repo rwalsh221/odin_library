@@ -36,14 +36,14 @@ let myLibrary = [];
 
 let bookArray = 0
 
-function book (id, title, author, pages, haveRead) {
+function book (id, title, author, pages, status) {
     this.id = id
     this.title = title,
     this.author = author,
     this.pages = pages,
-    this.haveRead = haveRead,
+    this.status = status,
     this.report = function() {
-        let returnReport = (`${this.title} by ${this.author} has ${this.pages} pages and ${this.haveRead}`);
+        let returnReport = (`${this.title} by ${this.author} has ${this.pages} pages and ${this.status}`);
         return returnReport;
     }
 }
@@ -54,7 +54,7 @@ console.log(newBook1.report());
 
 let addBookToLibrary = function () {
   
-  let id, title, author, pages, haveRead;
+  let id, title, author, pages, status;
 
   if (myLibrary.length > 0) {
     id = myLibrary[myLibrary.length -1].id + 1
@@ -69,13 +69,13 @@ let addBookToLibrary = function () {
   pages = document.getElementById('b-pages').value
   
   if (document.getElementById('radio-yes').checked === true) {
-    haveRead = 'The book has been read';
+    status = 'Avaliable';
   } else if (document.getElementById('radio-no').checked === true) {
-    haveRead = 'The book has not been read'
+    status = 'Unavaliable'
   }
   
 
-  let newBook = new book(id, title, author, pages, haveRead);
+  let newBook = new book(id, title, author, pages, status);
   myLibrary.push(newBook);
   document.forms[0].reset()
   render();
@@ -83,8 +83,8 @@ let addBookToLibrary = function () {
 
 let render = function () {
   
- let html = '<div class="book" id="bookid-%id%"> <div> <button class="btn btn__delete" id="btn__delete">delete</button> </div> <h2 class="book__header">BOOK TITLE: <span id="book-info__title-%num%"></span></h2> <h3 class="book__author">BOOK AUTHOR: <span id="book-info__author-%num%"></span></h3> <h3 class="book__pages">NUMBER OF PAGES: <span id="book-info__pages-%num%"></span></h3> <h3 class="book__read">BOOK HAS BEEN READ?: <span id="book-info__read-%num%"></span></h3> <div> <button class="btn btn__read" id="btn__read-yes">read yes</button> </div> <div> <button class="btn btn__read" id="btn__read-no">read no</button> </div> </div>'
-
+//  let html = '<div class="book" id="bookid-%id%"> <div> <button class="btn btn__delete" id="btn__delete">delete</button> </div> <h2 class="book__header">BOOK TITLE: <span id="book-info__title-%num%"></span></h2> <h3 class="book__author">BOOK AUTHOR: <span id="book-info__author-%num%"></span></h3> <h3 class="book__pages">NUMBER OF PAGES: <span id="book-info__pages-%num%"></span></h3> <h3 class="book__read">BOOK HAS BEEN READ?: <span id="book-info__read-%num%"></span></h3> <div> <button class="btn btn__read" id="btn__read-yes">read yes</button> </div> <div> <button class="btn btn__read" id="btn__read-no">read no</button> </div> </div>'
+let html = `<div class="book" id="bookid-%id%"> <button class="btn btn__delete" id="btn__delete">delete</button> <div class="line line-long"></div> <h3 class="book__header">BOOK TITLE: <span id="book-info__title-%num%">FONT TEST</span></h3> <div class="line"></div> <h4 class="book__author">BOOK AUTHOR: <span id="book-info__author-%num%">FONT TEST</span></h4> <div class="line"></div> <h4 class="book__pages">NUMBER OF PAGES: <span id="book-info__pages-%num%">FONT TEST</span></h4> <div class="line"></div> <h4 class="book__read">STATUS: <span id="book-info__read-%num%"></span></h4> <div class="line line-long"></div> <div> <button class="btn btn__read" id="btn__read-yes">Avaliable</button>   <button class="btn btn__read" id="btn__read-no">Unavaliable</button> </div> </div>`
  const parent = document.querySelector('.book__card');
 
  while(parent.firstChild) {
@@ -101,11 +101,11 @@ let render = function () {
     document.querySelector(`#book-info__title-${i}`).innerHTML = `${book.title}`;
     document.querySelector(`#book-info__author-${i}`).innerHTML = `${book.author}`;
     document.querySelector(`#book-info__pages-${i}`).innerHTML = `${book.pages}`;
-    document.querySelector(`#book-info__read-${i}`).innerHTML = `${book.haveRead}`;
+    document.querySelector(`#book-info__read-${i}`).innerHTML = `${book.status}`;
 
-    if (document.getElementById(`book-info__read-${i}`).textContent == 'The book has not been read') {
+    if (document.getElementById(`book-info__read-${i}`).textContent == 'Unavaliable') {
       document.getElementById(`bookid-${i}`).classList.add('book-NA');
-    } else if (document.getElementById(`book-info__read-${i}`).textContent == 'The book has been read') {
+    } else if (document.getElementById(`book-info__read-${i}`).textContent == 'Avaliable') {
       document.getElementById(`bookid-${i}`).classList.add('book-AV');
     }
   }
@@ -116,7 +116,7 @@ let render = function () {
 let deleteBook = function(event) {
   let bookNodeID, dBook, libraryID, libraryIndex, bookID, splitBookID;
   // console.log('work1');
-  bookNodeID = event.target.parentNode.parentNode.id
+  bookNodeID = event.target.parentNode.id
   log(event.target.id)
   // console.log('work2');
   // console.log(bookID);
@@ -179,35 +179,48 @@ let numberOfBook = function() {
   }
 };
 
-let hasBeenRead = function(event) {
-  let bookNodeID,bookNodeYesNo, splitBookID, bookID;
+let changeStatus = function(event) {
+  let bookNodeID,bookNodeYesNo, splitBookID, bookID, libraryID, libraryIndex;
   
   bookNodeID = event.target.parentNode.parentNode.id;
   log(bookNodeID);
 
-  if (bookNodeID && event.target.id == 'btn__read-yes' || event.target.id == 'btn__read-no') {
+  if (bookNodeID && event.target.id == 'btn__read-yes' || bookNodeID && event.target.id == 'btn__read-no') {
     splitBookID = bookNodeID.split('-');
-    bookID = splitBookID[1];
+    bookID = parseInt(splitBookID[1]);
   }
   
+  libraryID = myLibrary.map(function(current) {
+    return current.id;
+  })
+
+  log(libraryID + ' this is library id')
+  log(bookID + ' this is book id')
+
+  libraryIndex = libraryID.indexOf(bookID)
+  log(libraryIndex + ' this is library index')
   
 
   bookNodeYesNo = event.target.id
   log(event.target.id);
-  log(bookNodeYesNo);
+  log(bookNodeYesNo + 'yesno');
 
   if (bookNodeYesNo == 'btn__read-yes') {
-    document.getElementById(`book-info__read-${bookID}`).textContent = 'This book has been read'
+    document.getElementById(`book-info__read-${bookID}`).textContent = 'Avaliable'
     document.getElementById(`bookid-${bookID}`).style.boxShadow = '1rem 1rem 1rem black';
     
     document.getElementById(`bookid-${bookID}`).classList.remove('book-NA');
     document.getElementById(`bookid-${bookID}`).classList.add('book-AV');
+
+    myLibrary[libraryIndex].status = 'Avaliable';
     
   } else if (bookNodeYesNo == 'btn__read-no') {
-    document.getElementById(`book-info__read-${bookID}`).textContent = 'This book has not been read'
-    // document.getElementById(`bookid-${bookID}`).style.boxShadow = '1rem 1rem 1rem red';
+    document.getElementById(`book-info__read-${bookID}`).textContent = 'Unavaliable'
+    document.getElementById(`bookid-${bookID}`).style.boxShadow = '1rem 1rem 1rem red';
     document.getElementById(`bookid-${bookID}`).classList.remove('book-AV');
     document.getElementById(`bookid-${bookID}`).classList.add('book-NA');
+
+    myLibrary[libraryIndex].status = 'Unavaliable';
 
   }
 };
@@ -216,7 +229,7 @@ document.getElementById('btn__form').addEventListener('click', openForm);
 document.getElementById('btn__close').addEventListener('click', closeForm);
 document.getElementById('btn__add').addEventListener('click', addBookToLibrary);
 document.querySelector('.container').addEventListener('click', deleteBook);
-document.querySelector('.container').addEventListener('click', hasBeenRead);
+document.querySelector('.container').addEventListener('click', changeStatus);
 
 
 
