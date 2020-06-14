@@ -48,8 +48,8 @@ function book (id, title, author, pages, status) {
     }
 }
 
-const newBook1 = new book('The Bible', 'Jesus', '510', 'it has not been read');
-console.log(newBook1.report());
+// const newBook1 = new book('The Bible', 'Jesus', '510', 'it has not been read');
+// console.log(newBook1.report());
 
 
 let addBookToLibrary = function () {
@@ -78,6 +78,7 @@ let addBookToLibrary = function () {
   let newBook = new book(id, title, author, pages, status);
   myLibrary.push(newBook);
   document.forms[0].reset()
+  log(myLibrary)
   render();
 }
 
@@ -104,9 +105,10 @@ let html = `<div class="book" id="bookid-%id%"> <button class="btn btn__delete" 
     document.querySelector(`#book-info__read-${i}`).innerHTML = `${book.status}`;
 
     if (document.getElementById(`book-info__read-${i}`).textContent == 'Unavaliable') {
-      document.getElementById(`bookid-${i}`).classList.add('book-NA');
+      document.getElementById(`bookid-${book.id}`).classList.add('book-NA');
+      log(`book`)
     } else if (document.getElementById(`book-info__read-${i}`).textContent == 'Avaliable') {
-      document.getElementById(`bookid-${i}`).classList.add('book-AV');
+      document.getElementById(`bookid-${book.id}`).classList.add('book-AV');
     }
   }
 
@@ -183,7 +185,9 @@ let changeStatus = function(event) {
   let bookNodeID,bookNodeYesNo, splitBookID, bookID, libraryID, libraryIndex;
   
   bookNodeID = event.target.parentNode.parentNode.id;
+
   log(bookNodeID);
+  log('this is booknodeid for status')
 
   if (bookNodeID && event.target.id == 'btn__read-yes' || bookNodeID && event.target.id == 'btn__read-no') {
     splitBookID = bookNodeID.split('-');
@@ -206,7 +210,7 @@ let changeStatus = function(event) {
   log(bookNodeYesNo + 'yesno');
 
   if (bookNodeYesNo == 'btn__read-yes') {
-    document.getElementById(`book-info__read-${bookID}`).textContent = 'Avaliable'
+    document.getElementById(`book-info__read-${libraryIndex}`).textContent = 'Avaliable'
     document.getElementById(`bookid-${bookID}`).style.boxShadow = '1rem 1rem 1rem black';
     
     document.getElementById(`bookid-${bookID}`).classList.remove('book-NA');
@@ -215,7 +219,7 @@ let changeStatus = function(event) {
     myLibrary[libraryIndex].status = 'Avaliable';
     
   } else if (bookNodeYesNo == 'btn__read-no') {
-    document.getElementById(`book-info__read-${bookID}`).textContent = 'Unavaliable'
+    document.getElementById(`book-info__read-${libraryIndex}`).textContent = 'Unavaliable'
     document.getElementById(`bookid-${bookID}`).style.boxShadow = '1rem 1rem 1rem red';
     document.getElementById(`bookid-${bookID}`).classList.remove('book-AV');
     document.getElementById(`bookid-${bookID}`).classList.add('book-NA');
@@ -225,8 +229,18 @@ let changeStatus = function(event) {
   }
 };
 
+const testpress = () => {
+  console.log('btn-add press')
+}
+
+const testclose = () => {
+  console.log('btn-close press')
+}
+
 document.getElementById('btn__form').addEventListener('click', openForm);
 document.getElementById('btn__close').addEventListener('click', closeForm);
+document.getElementById('btn__close').addEventListener('click', testclose);
+document.getElementById('btn__add').addEventListener('click', testpress);
 document.getElementById('btn__add').addEventListener('click', addBookToLibrary);
 document.querySelector('.container').addEventListener('click', deleteBook);
 document.querySelector('.container').addEventListener('click', changeStatus);
@@ -235,9 +249,9 @@ document.querySelector('.container').addEventListener('click', changeStatus);
 
 
 
-const testString = ('id-55565456564');
-let testSplit = testString.split("-")
-console.log(testSplit);
+// const testString = ('id-55565456564');
+// let testSplit = testString.split("-")
+// console.log(testSplit);
 numberOfBook();
 
 

@@ -134,7 +134,7 @@ html {
   }
 
   .form-popup {
-    /* display: none; */
+    display: none;
     
     background-image: radial-gradient(circle, #ca5116 23%, rgba(249,179,132,1) 77%);
     border: 2px solid #581c0c;
