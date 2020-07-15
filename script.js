@@ -85,7 +85,7 @@ let addBookToLibrary = function () {
 let render = function () {
   
 //  let html = '<div class="book" id="bookid-%id%"> <div> <button class="btn btn__delete" id="btn__delete">delete</button> </div> <h2 class="book__header">BOOK TITLE: <span id="book-info__title-%num%"></span></h2> <h3 class="book__author">BOOK AUTHOR: <span id="book-info__author-%num%"></span></h3> <h3 class="book__pages">NUMBER OF PAGES: <span id="book-info__pages-%num%"></span></h3> <h3 class="book__read">BOOK HAS BEEN READ?: <span id="book-info__read-%num%"></span></h3> <div> <button class="btn btn__read" id="btn__read-yes">read yes</button> </div> <div> <button class="btn btn__read" id="btn__read-no">read no</button> </div> </div>'
-let html = `<div class="book" id="bookid-%id%"> <button class="btn btn__delete" id="btn__delete">delete</button> <div class="line line-long"></div> <h3 class="book__header">BOOK TITLE: <span id="book-info__title-%num%">FONT TEST</span></h3> <div class="line"></div> <h4 class="book__author">BOOK AUTHOR: <span id="book-info__author-%num%">FONT TEST</span></h4> <div class="line"></div> <h4 class="book__pages">NUMBER OF PAGES: <span id="book-info__pages-%num%">FONT TEST</span></h4> <div class="line"></div> <h4 class="book__read">STATUS: <span id="book-info__read-%num%"></span></h4> <div class="line line-long"></div> <div> <button class="btn btn__read" id="btn__read-yes">Avaliable</button>   <button class="btn btn__read" id="btn__read-no">Unavaliable</button> </div> </div>`
+let html = `<div class="book" id="bookid-%id%"> <div> <button class="btn btn__delete" id="btn__delete">delete</button> </div> <div class="line line-long"></div> <h3 class="book__header">BOOK TITLE: <span id="book-info__title-%num%">FONT TEST</span></h3> <div class="line"></div> <h4 class="book__author">BOOK AUTHOR: <span id="book-info__author-%num%">FONT TEST</span></h4> <div class="line"></div> <h4 class="book__pages">NUMBER OF PAGES: <span id="book-info__pages-%num%">FONT TEST</span></h4> <div class="line"></div> <h4 class="book__read">STATUS: <span id="book-info__read-%num%"></span></h4> <div class="line line-long"></div> <div> <button class="btn btn__read" id="btn__read-yes">Avaliable</button>   <button class="btn btn__read" id="btn__read-no">Unavaliable</button> </div> </div>`
  const parent = document.querySelector('.book__card');
 
  while(parent.firstChild) {
@@ -118,7 +118,7 @@ let html = `<div class="book" id="bookid-%id%"> <button class="btn btn__delete" 
 let deleteBook = function(event) {
   let bookNodeID, dBook, libraryID, libraryIndex, bookID, splitBookID;
   // console.log('work1');
-  bookNodeID = event.target.parentNode.id
+  bookNodeID = event.target.parentNode.parentNode.id
   log(event.target.id)
   // console.log('work2');
   // console.log(bookID);
@@ -155,6 +155,7 @@ let deleteBook = function(event) {
   log(myLibrary);
   let numBook = myLibrary.length;
   numberOfBook();
+  render();
 
 }
 
