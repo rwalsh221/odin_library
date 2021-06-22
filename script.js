@@ -1,5 +1,7 @@
 let myLibrary = [];
 
+let formOpen = false;
+
 function book(id, title, author, pages, status) {
   this.id = id;
   (this.title = title),
@@ -113,11 +115,25 @@ let deleteBook = function (event) {
 let openForm = function () {
   document.getElementById('book-form').style.display = 'inline-block';
   document.getElementById('body__blur').style.filter = 'blur(60px)';
+  window.addEventListener('click', clickOutside);
 };
 
 let closeForm = function () {
+  console.log('close');
   document.getElementById('book-form').style.display = 'none';
   document.getElementById('body__blur').style.filter = 'blur(0px)';
+  window.removeEventListener('click', clickOutside);
+};
+
+let clickOutside = function (e) {
+  const targetId = 'btn__form';
+  const target = e.target.id;
+  const parentNode = e.target.parentNode.id;
+
+  if (target !== targetId && parentNode !== targetId) {
+    console.log(e.target.parentNode.id);
+    closeForm();
+  }
 };
 
 let numberOfBook = function () {
