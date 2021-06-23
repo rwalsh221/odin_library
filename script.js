@@ -126,12 +126,10 @@ let numberOfBook = function () {
 
 let changeStatus = function (event) {
   let bookNodeID, bookNodeYesNo, splitBookID, bookID, libraryID, libraryIndex;
-
-  if (
-    (bookNodeID && event.target.id == 'btn__read-yes') ||
-    (bookNodeID && event.target.id == 'btn__read-no')
-  ) {
+  // bookNodeID = event.target.parentNode.parentNode.id;
+  if (event.target.id == 'btn__read-yes' || event.target.id == 'btn__read-no') {
     bookNodeID = event.target.parentNode.parentNode.id;
+    console.log(bookNodeID);
 
     splitBookID = bookNodeID.split('-');
     bookID = parseInt(splitBookID[1]);

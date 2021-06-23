@@ -27,17 +27,14 @@ ul {
   font-weight: normal;
 }
 
-/* ol, ul {
-    list-style: none;
-  } */
-
-img {
-  max-width: 100%;
-  height: auto;
-}
-
 body {
   background-color: #581c0c;
+  padding: 1rem;
+  width: 100%;
+}
+
+main {
+  width: 100%;
 }
 
 h1,
@@ -55,8 +52,7 @@ h1 {
 
 h2 {
   text-align: right;
-  margin-bottom: 1rem;
-  margin-right: 10rem;
+  margin: 0 2rem 1rem 0;
   font-size: 3.5rem;
   -webkit-text-stroke: 1px #ca5116;
 }
@@ -65,7 +61,7 @@ h2 {
   width: 85%;
   min-height: 80vh;
   background-color: #ca5116;
-  margin: 0 8rem 0 auto;
+  margin-left: auto;
   border-radius: 2rem;
   box-shadow: 1rem 1rem 1rem black;
 }
@@ -77,7 +73,7 @@ h2 {
 }
 
 .book {
-  flex: 0 1 22%;
+  flex: 0 0 40rem;
   padding: 30px 10px;
   background-image: radial-gradient(
     circle,
@@ -127,10 +123,6 @@ h2 {
 }
 
 /* FORM STYLE */
-
-.book-input {
-  position: relative;
-}
 
 .form-popup {
   display: none;
@@ -222,6 +214,7 @@ h2 {
 
 .btn__read {
   margin-top: 1rem;
+  min-width: max-content;
 }
 
 #btn__read-yes {
@@ -230,9 +223,11 @@ h2 {
 
 .btn__form {
   position: fixed;
-  width: 10%;
-  height: 70vh;
+  min-width: min-content;
+  padding: 1.5rem;
+  height: 50rem;
   margin-top: 5rem;
+  margin-left: 3%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -276,4 +271,121 @@ h2 {
 
 .book-NA {
   background-image: radial-gradient(circle, red 23%, pink 77%);
+}
+
+/* @media screen and (max-width: 965px) {
+  .book {
+    flex: 0 0 45%;
+    margin: 0.5rem;
+  }
+} */
+
+@media screen and (min-width: 1920px) {
+  header,
+  main {
+    width: 192rem;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (max-width: 1260px) {
+  .btn__form {
+    margin-left: 0;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .btn__form {
+    margin-top: 0;
+    max-height: 13vh;
+    width: 90%;
+    position: sticky;
+    margin: 0 auto;
+    top: 4rem;
+    z-index: 1000;
+    text-align: center;
+    vertical-align: center;
+    min-height: 10rem;
+  }
+
+  .form-popup {
+    z-index: 2000;
+  }
+
+  .book-section {
+    margin: 3rem auto 0 auto;
+    width: 90%;
+  }
+
+  .btn__form-sp3 {
+    display: none;
+  }
+
+  .btn__form-sp1 {
+    margin-top: 0;
+    min-height: max-content;
+  }
+
+  .book__card {
+    width: 100%;
+  }
+
+  .book {
+    flex: 0 0 45%;
+    margin: 0.5rem;
+  }
+}
+
+@media screen and (max-width: 685px) {
+  html {
+    font-size: 55%;
+  }
+}
+@media screen and (max-width: 605px) {
+  h1 {
+    font-size: 5rem;
+  }
+
+  h2 {
+    font-size: 2.5rem;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .book {
+    flex: 0 0 85%;
+    margin: 1rem;
+  }
+}
+@media screen and (max-width: 505px) {
+  html {
+    font-size: 50%;
+  }
+}
+@media screen and (max-width: 460px) {
+  html {
+    font-size: 45%;
+  }
+}
+@media screen and (max-width: 415px) {
+  html {
+    font-size: 40%;
+  }
+
+  .form-box__status {
+    display: flex;
+  }
+}
+@media screen and (max-width: 370px) {
+  h1 {
+    font-size: 4rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+}
+@media screen and (max-width: 550px) {
+}
+@media screen and (max-width: 685px) {
 }
