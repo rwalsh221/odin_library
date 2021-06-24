@@ -1,8 +1,5 @@
 let myLibrary = [];
 
-// ADD LOCAL STORAGE
-// TEXT STROKE SMALL SCREEN
-
 function book(id, title, author, pages, status) {
   this.id = id;
   (this.title = title),
@@ -38,6 +35,7 @@ let addBookToLibrary = function () {
   myLibrary.push(newBook);
   document.forms[0].reset();
 
+  setLocalStorage('library', myLibrary);
   render();
 };
 
@@ -108,8 +106,8 @@ let deleteBook = function (event) {
     myLibrary.splice(libraryIndex, 1);
   }
 
-  let numBook = myLibrary.length;
-  numberOfBook();
+  setLocalStorage('library', myLibrary);
+
   render();
 };
 
@@ -167,6 +165,24 @@ let changeStatus = function (event) {
   }
 };
 
+// LOCAL STORAGE
+
+const setLocalStorage = function (storeName, data) {
+  localStorage.setItem(`${storeName}`, JSON.stringify(data));
+};
+const getLocalStorage = function (storeName) {
+  let data = localStorage.getItem(`${storeName}`);
+
+  if (data) {
+    myLibrary = JSON.parse(data);
+    render();
+  }
+};
+
+getLocalStorage('library');
+
+// OPEN POP UP FORM
+
 let openForm = function () {
   document.getElementById('book-form').style.display = 'inline-block';
   document.getElementById('body__blur').style.filter = 'blur(60px)';
@@ -175,12 +191,13 @@ let openForm = function () {
 };
 
 let closeForm = function () {
-  console.log('close');
   document.getElementById('book-form').style.display = 'none';
   document.getElementById('body__blur').style.filter = 'blur(0px)';
   removeClickOutsideListener('body__blur');
   removeClickOutsideListener('header');
 };
+
+// EVENT LISTENER
 
 const addClickOutsideListener = function (id) {
   document.getElementById(`${id}`).addEventListener('click', closeForm);
