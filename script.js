@@ -1,5 +1,8 @@
 let myLibrary = [];
 
+// ADD LOCAL STORAGE
+// TEXT STROKE SMALL SCREEN
+
 function book(id, title, author, pages, status) {
   this.id = id;
   (this.title = title),
